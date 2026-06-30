@@ -1,0 +1,446 @@
+[
+  {
+    "candidate_id": "unknown",
+    "full_name": null,
+    "emails": [],
+    "phones": [],
+    "location": null,
+    "links": {},
+    "headline": null,
+    "years_experience": null,
+    "skills": [],
+    "experience": [],
+    "education": [],
+    "provenance": [],
+    "overall_confidence": 0.0
+  },
+  {
+    "candidate_id": "akshayarsri@gmail.com",
+    "full_name": null,
+    "emails": [
+      "akshayarsri@gmail.com"
+    ],
+    "phones": [
+      "+918015122453"
+    ],
+    "location": null,
+    "links": {},
+    "headline": null,
+    "years_experience": null,
+    "skills": [
+      {
+        "name": "css",
+        "confidence": 0.6,
+        "sources": [
+          "resume"
+        ]
+      },
+      {
+        "name": "git",
+        "confidence": 0.6,
+        "sources": [
+          "resume"
+        ]
+      },
+      {
+        "name": "java",
+        "confidence": 0.6,
+        "sources": [
+          "resume"
+        ]
+      },
+      {
+        "name": "javascript",
+        "confidence": 0.6,
+        "sources": [
+          "resume"
+        ]
+      },
+      {
+        "name": "mongodb",
+        "confidence": 0.6,
+        "sources": [
+          "resume"
+        ]
+      },
+      {
+        "name": "mysql",
+        "confidence": 0.6,
+        "sources": [
+          "resume"
+        ]
+      },
+      {
+        "name": "node",
+        "confidence": 0.6,
+        "sources": [
+          "resume"
+        ]
+      },
+      {
+        "name": "python",
+        "confidence": 0.6,
+        "sources": [
+          "resume"
+        ]
+      },
+      {
+        "name": "react",
+        "confidence": 0.6,
+        "sources": [
+          "resume"
+        ]
+      },
+      {
+        "name": "sql",
+        "confidence": 0.6,
+        "sources": [
+          "resume"
+        ]
+      }
+    ],
+    "experience": [
+      {
+        "company": null,
+        "title": "Full Stack Developer Intern \u2014 Novitech R&D January 2025",
+        "start": null,
+        "end": null,
+        "summary": "Engineered RESTful APIs using Node.js and Express to facilitate seamless data communication. Designed and implemented interactive, responsive UI components in React.js, optimizing for performance.",
+        "confidence": 0.4,
+        "source": "resume"
+      },
+      {
+        "company": null,
+        "title": "Technical Systems Intern \u2014 Rider Levett Bucknall (RLB), Dubai March \u2013 May 2025",
+        "start": null,
+        "end": null,
+        "summary": "Developed automated scripts to identify data patterns and perform complex min/max comparisons. Architected structured extraction methods for contractor data (BOQ), improving data integrity.",
+        "confidence": 0.4,
+        "source": "resume"
+      }
+    ],
+    "education": [
+      {
+        "institution": "KPR Institute of Engineering and Technology, Coimbatore, Tamil Nadu 2023 \u2013 2027",
+        "degree": "b.tech",
+        "field": null,
+        "end_year": 2027,
+        "confidence": 0.4,
+        "source": "resume"
+      },
+      {
+        "institution": "SPB Matric Higher Secondary School 2022 \u2013 2023",
+        "degree": "hsc",
+        "field": null,
+        "end_year": 2023,
+        "confidence": 0.4,
+        "source": "resume"
+      },
+      {
+        "institution": "SPB Matric Higher Secondary School 2020 \u2013 2021",
+        "degree": "sslc",
+        "field": null,
+        "end_year": 2021,
+        "confidence": 0.4,
+        "source": "resume"
+      }
+    ],
+    "provenance": [
+      {
+        "field": "emails",
+        "source": "resume",
+        "method": "regex_extract"
+      },
+      {
+        "field": "phones",
+        "source": "resume",
+        "method": "e164_normalize"
+      },
+      {
+        "field": "skills",
+        "source": "resume",
+        "method": "keyword_match"
+      },
+      {
+        "field": "skills",
+        "source": "resume",
+        "method": "keyword_match"
+      },
+      {
+        "field": "skills",
+        "source": "resume",
+        "method": "keyword_match"
+      },
+      {
+        "field": "skills",
+        "source": "resume",
+        "method": "keyword_match"
+      },
+      {
+        "field": "skills",
+        "source": "resume",
+        "method": "keyword_match"
+      },
+      {
+        "field": "skills",
+        "source": "resume",
+        "method": "keyword_match"
+      },
+      {
+        "field": "skills",
+        "source": "resume",
+        "method": "keyword_match"
+      },
+      {
+        "field": "skills",
+        "source": "resume",
+        "method": "keyword_match"
+      },
+      {
+        "field": "skills",
+        "source": "resume",
+        "method": "keyword_match"
+      },
+      {
+        "field": "skills",
+        "source": "resume",
+        "method": "keyword_match"
+      }
+    ],
+    "overall_confidence": 0.58
+  },
+  {
+    "candidate_id": "ravi.kumar@example.com",
+    "full_name": "Ravi Kumar",
+    "emails": [
+      "ravi.kumar@example.com"
+    ],
+    "phones": [
+      "+919123456780"
+    ],
+    "location": null,
+    "links": {},
+    "headline": null,
+    "years_experience": null,
+    "skills": [],
+    "experience": [],
+    "education": [],
+    "provenance": [
+      {
+        "field": "full_name",
+        "source": "ats_json",
+        "method": "multi_source_agree"
+      },
+      {
+        "field": "emails",
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      {
+        "field": "phones",
+        "source": "recruiter_csv",
+        "method": "e164_normalize"
+      },
+      {
+        "field": "current_company",
+        "source": "ats_json",
+        "method": "multi_source_agree"
+      },
+      {
+        "field": "current_title",
+        "source": "ats_json",
+        "method": "precedence_conflict"
+      }
+    ],
+    "overall_confidence": 0.93
+  },
+  {
+    "candidate_id": "divya.shree@example.com",
+    "full_name": "Divya Shree",
+    "emails": [
+      "divya.shree@example.com"
+    ],
+    "phones": [
+      "+919090909090"
+    ],
+    "location": null,
+    "links": {},
+    "headline": null,
+    "years_experience": null,
+    "skills": [],
+    "experience": [],
+    "education": [],
+    "provenance": [
+      {
+        "field": "full_name",
+        "source": "ats_json",
+        "method": "key_mapped"
+      },
+      {
+        "field": "emails",
+        "source": "ats_json",
+        "method": "key_mapped"
+      },
+      {
+        "field": "phones",
+        "source": "ats_json",
+        "method": "e164_normalize"
+      },
+      {
+        "field": "current_company",
+        "source": "ats_json",
+        "method": "key_mapped"
+      },
+      {
+        "field": "current_title",
+        "source": "ats_json",
+        "method": "key_mapped"
+      }
+    ],
+    "overall_confidence": 0.85
+  },
+  {
+    "candidate_id": "akshaya.sri@example.com",
+    "full_name": "Akshaya Sri",
+    "emails": [
+      "akshaya.sri@example.com"
+    ],
+    "phones": [
+      "+919876543210"
+    ],
+    "location": null,
+    "links": {},
+    "headline": null,
+    "years_experience": null,
+    "skills": [
+      {
+        "name": "aws",
+        "confidence": 0.5,
+        "sources": [
+          "recruiter_notes"
+        ]
+      },
+      {
+        "name": "git",
+        "confidence": 0.5,
+        "sources": [
+          "recruiter_notes"
+        ]
+      },
+      {
+        "name": "python",
+        "confidence": 0.5,
+        "sources": [
+          "recruiter_notes"
+        ]
+      },
+      {
+        "name": "react",
+        "confidence": 0.5,
+        "sources": [
+          "recruiter_notes"
+        ]
+      },
+      {
+        "name": "sql",
+        "confidence": 0.5,
+        "sources": [
+          "recruiter_notes"
+        ]
+      }
+    ],
+    "experience": [],
+    "education": [],
+    "provenance": [
+      {
+        "field": "full_name",
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      {
+        "field": "emails",
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      {
+        "field": "phones",
+        "source": "recruiter_csv",
+        "method": "e164_normalize"
+      },
+      {
+        "field": "current_company",
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      {
+        "field": "current_title",
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      {
+        "field": "skills",
+        "source": "recruiter_notes",
+        "method": "keyword_match"
+      },
+      {
+        "field": "skills",
+        "source": "recruiter_notes",
+        "method": "keyword_match"
+      },
+      {
+        "field": "skills",
+        "source": "recruiter_notes",
+        "method": "keyword_match"
+      },
+      {
+        "field": "skills",
+        "source": "recruiter_notes",
+        "method": "keyword_match"
+      },
+      {
+        "field": "skills",
+        "source": "recruiter_notes",
+        "method": "keyword_match"
+      }
+    ],
+    "overall_confidence": 0.65
+  },
+  {
+    "candidate_id": "Meena Pillai",
+    "full_name": "Meena Pillai",
+    "emails": [],
+    "phones": [
+      "+919988776655"
+    ],
+    "location": null,
+    "links": {},
+    "headline": null,
+    "years_experience": null,
+    "skills": [],
+    "experience": [],
+    "education": [],
+    "provenance": [
+      {
+        "field": "full_name",
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      {
+        "field": "phones",
+        "source": "recruiter_csv",
+        "method": "e164_normalize"
+      },
+      {
+        "field": "current_company",
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      },
+      {
+        "field": "current_title",
+        "source": "recruiter_csv",
+        "method": "direct_field"
+      }
+    ],
+    "overall_confidence": 0.9
+  }
+]

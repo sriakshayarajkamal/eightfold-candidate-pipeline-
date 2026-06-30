@@ -1,0 +1,9 @@
+Akshaya Sri
+Email: akshaya.sri@example.com
+Phone: +91-9876543210
+
+Summary:
+Software engineer with experience in Python, SQL, and React.
+Previously worked at TCS as a backend developer before moving roles.
+
+Skills: Python, SQL, React, Git, AWS

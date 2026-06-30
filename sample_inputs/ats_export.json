@@ -1,0 +1,16 @@
+[
+  {
+    "applicant_name": "Ravi Kumar",
+    "contact_email": "ravi.kumar@example.com",
+    "mobile": "9123456780",
+    "employer": "TCS",
+    "position": "Senior Data Analyst"
+  },
+  {
+    "candidate_name": "Divya Shree",
+    "email_address": "divya.shree@example.com",
+    "phone_number": "9090909090",
+    "company": "Accenture",
+    "job_title": "Business Analyst"
+  }
+]
