@@ -375,3 +375,6 @@ This is a deliberate design decision, not a limitation.
 - LinkedIn source not implemented — requires authentication/scraping, out of scope
 - Name-only fallback matching is exact, not fuzzy — `"Akshaya Sri"` and `"Sri Akshaya"` won't auto-merge
 - `years_experience` requires date ranges in experience entries — roles listed without dates produce null
+
+<img width="2720" height="3680" alt="eightfold_pipeline_flowchart" src="https://github.com/user-attachments/assets/02eab9f5-b668-4451-868c-dc51ad48813c" />
+
