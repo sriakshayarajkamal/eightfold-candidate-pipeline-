@@ -176,6 +176,72 @@ Every candidate profile has these fields:
 
 ---
 
+## How Confidence Is Calculated
+
+Every single value in the pipeline carries its own confidence score (0.0 – 1.0) based on two things: **where it came from** and **whether sources agreed**.
+
+### Per-field confidence — assigned at extraction time
+
+| Source & Method | Confidence | Why |
+|---|---|---|
+| CSV / ATS JSON — direct field | **0.90** | Structured, typed, human-verified |
+| GitHub API — api_field | **0.80** | Live API, reliable but not verified |
+| Resume — regex email/phone | **0.75** | Strong pattern, hard to get wrong |
+| GitHub — repo language inference | **0.75** | Language detected from actual code |
+| Resume — name header heuristic | **0.70** | First capitalized line, usually right |
+| Resume — location / date calc | **0.60 – 0.70** | Heuristic, can misfire on odd layouts |
+| Resume — keyword skill match | **0.60** | Vocab match, not semantic understanding |
+| Resume/Notes — section heuristic | **0.40** | Most fragile — depends on clean PDF layout |
+
+### Then merge adjusts confidence based on agreement
+
+| Situation | Result |
+|---|---|
+| 2+ sources have the **same value** | Bumped to **1.0** — corroborated |
+| Sources have **different values** | Dropped to **0.5** — conflict flagged |
+| Only one source has the value | Kept at extraction-time score above |
+
+### `overall_confidence` — the single number per candidate
+
+This is the **weighted average** of confidence scores across the key identity fields only: `full_name`, `emails`, `phones`, and `skills`. Location, education, experience are excluded because they are heuristic extractions and would unfairly drag the score down for candidates who came from structured sources.
+
+**Example — Ravi Kumar (CSV + ATS JSON, both agree):**
+- full_name: 1.0 (both sources agree)
+- email: 0.9 (CSV direct field)
+- phone: 0.9 (CSV direct field)
+- no skills
+- overall = (1.0 + 0.9 + 0.9) / 3 = **0.93**
+
+**Example — SRI AKSHAYA (PDF resume only):**
+- full_name: 0.7 (header heuristic)
+- email: 0.75 (regex)
+- phone: 0.75 (regex)
+- 11 skills at 0.6–0.75 each
+- overall ≈ **0.65**
+
+A score near 1.0 means multiple structured sources corroborated the values. A score near 0.5 means the data came from a single unstructured source or sources conflicted. This helps recruiters instantly see which profiles are trustworthy vs which need a manual check.
+
+### Plain English — three scenarios
+
+**Sources agree.**
+CSV says email is `akshaya.sri@example.com`, resume also finds that exact same email. Confidence goes to **1.0** — multiple independent sources confirmed the same value. That's the strongest signal we have.
+
+**Sources conflict.**
+CSV says title is `"Data Analyst"`, ATS says `"Senior Data Analyst"`. We pick the structured source as the winner using precedence. But confidence drops to **0.5** — not because we're unsure which source to trust, but because the disagreement itself is a signal that something changed or one source is outdated. We don't hide that conflict behind a confident-looking number.
+
+**Only one source has it.**
+Meena Pillai's name only appears in the CSV. Confidence stays at whatever the extraction assigned — **0.9** in this case — because there's nothing to compare against.
+
+### How deduplication works
+
+For **scalar fields** (name, title, company) — we pick exactly one winner and discard the rest.
+
+For **list fields** (skills, emails, phones) — we union across all sources and dedup by exact value. If both the CSV and the resume mention Python, it appears **once** in the output with the highest-confidence version kept, not twice.
+
+The reason this works correctly: normalization runs **before** dedup. `"Python"`, `"PYTHON"`, and `"python"` all become `"python"` before they reach the merge logic — so they collapse into one entry automatically.
+
+---
+
 ## Custom Output Config
 
 Pass `--config config_example.json` to reshape the output without touching any code:
