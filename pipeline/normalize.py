@@ -2,60 +2,70 @@
 Stage 2: normalize
 
 Takes the raw CandidateRecord list from stage 1 and standardizes formats
-IN PLACE: phones -> E.164, skills -> canonical lowercase names.
+IN PLACE: phones -> E.164 via the `phonenumbers` library (deterministic,
+offline, handles country codes properly), skills -> canonical lowercase,
+emails -> lowercase.
 
-Design choice: we normalize BEFORE merging (not after), because conflict
-detection in the merge stage only works correctly if two phone numbers
-are already in the same format - otherwise "9876543210" and
-"+91-9876543210" would look like a conflict when they're the same number.
+Design choice: normalize BEFORE merging so conflict detection compares
+like-for-like ("+919876543210" vs "9876543210" should not look like a
+conflict).
+
+We use the `phonenumbers` library instead of hand-rolled regex because:
+  - It handles 200+ country formats correctly and deterministically
+  - It's fully offline (no API, no network)
+  - It distinguishes "invalid number" from "valid but odd format"
+  - Satisfies the deterministic constraint from the brief
 """
 
 import re
 
-DEFAULT_COUNTRY_CODE = "91"  # assume India if no country code present
+try:
+    import phonenumbers
+    from phonenumbers import NumberParseException
+    _PHONENUMBERS_AVAILABLE = True
+except ImportError:
+    _PHONENUMBERS_AVAILABLE = False
+
+DEFAULT_REGION = "IN"   # assume India if no country code present
 
 
-def normalize_phone(raw: str) -> str:
-    """Best-effort E.164 normalization. If we can't produce something
-    confident, we return the digits-only version rather than inventing
-    a country code we're not sure about - this is intentionally
-    conservative per the 'wrong is worse than empty' principle."""
-    digits = re.sub(r"\D", "", raw)
-
-    if raw.strip().startswith("+"):
-        return "+" + digits
-
-    if len(digits) == 10:
-        return f"+{DEFAULT_COUNTRY_CODE}{digits}"
-
-    if len(digits) > 10:
-        return f"+{digits}"
-
-    # Too short to be a real number - return as-is, let validation flag it
-    return digits
-
-
-def is_valid_phone(normalized: str) -> bool:
+def normalize_phone(raw: str) -> str | None:
     """
-    A normalized phone is considered valid only if, after stripping the
-    leading '+', it has 10-15 digits (E.164 range) AND - for our assumed
-    default-country case - exactly 10 national digits. Anything shorter
-    (e.g. a typo dropping one digit) is NOT a second real phone number;
-    it's a malformed value and should not be silently kept alongside a
-    correct one. Per "wrong but confident is worse than honestly empty",
-    we drop these rather than presenting them as a valid second contact
-    number.
+    Normalize to E.164 using the phonenumbers library.
+    Returns None if the number is unparseable or invalid — callers
+    should drop None results rather than keeping a bad value.
+    Falls back to digit-strip heuristic if library not installed.
     """
-    digits = normalized.lstrip("+")
-    if not digits.isdigit():
-        return False
-    return 10 <= len(digits) <= 15
+    if not raw or not raw.strip():
+        return None
+
+    if _PHONENUMBERS_AVAILABLE:
+        try:
+            parsed = phonenumbers.parse(raw, DEFAULT_REGION)
+            if phonenumbers.is_valid_number(parsed):
+                return phonenumbers.format_number(
+                    parsed, phonenumbers.PhoneNumberFormat.E164
+                )
+            return None   # syntactically parsed but not a valid number
+        except NumberParseException:
+            return None
+    else:
+        # Fallback: manual heuristic (original behaviour)
+        digits = re.sub(r"\D", "", raw)
+        if raw.strip().startswith("+"):
+            candidate = "+" + digits
+        elif len(digits) == 10:
+            candidate = "+91" + digits
+        elif len(digits) > 10:
+            candidate = "+" + digits
+        else:
+            return None
+        digs = candidate.lstrip("+")
+        return candidate if (digs.isdigit() and 10 <= len(digs) <= 15) else None
 
 
 def normalize_skill(raw: str) -> str:
-    """Lowercase + strip. Canonical synonym mapping already happened
-    at extraction time (SKILL_CANON) for resume/notes; here we just make
-    sure CSV/ATS-sourced skill-like strings (if any) follow the same rule."""
+    """Lowercase + strip."""
     return raw.strip().lower()
 
 
@@ -63,13 +73,13 @@ def normalize_records(records: list) -> list:
     for rec in records:
         normalized_phones = []
         for fv in rec.phones:
-            normalized_value = normalize_phone(fv.value)
-            if not is_valid_phone(normalized_value):
-                print(f"[warn] dropping malformed phone '{fv.value}' from source "
-                      f"'{fv.source}' (normalized to '{normalized_value}', invalid length)")
+            result = normalize_phone(fv.value)
+            if result is None:
+                print(f"[warn] dropping invalid phone '{fv.value}' "
+                      f"from source '{fv.source}'")
                 continue
             normalized_phones.append(
-                fv.__class__(normalized_value, fv.source, "e164_normalize", fv.confidence)
+                fv.__class__(result, fv.source, "e164_normalize", fv.confidence)
             )
         rec.phones = normalized_phones
 

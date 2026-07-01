@@ -138,10 +138,10 @@ def to_default_schema(record) -> dict:
         "full_name": _fv_to_value(record.full_name),
         "emails": [fv.value for fv in record.emails],
         "phones": [fv.value for fv in record.phones],
-        "location": None,  # descoped: no location source in our 2 chosen inputs
-        "links": {},        # descoped: no GitHub/LinkedIn source wired up
-        "headline": None,   # descoped: not extracted from resume in this scope
-        "years_experience": None,  # descoped: would need date-range parsing
+        "location": _fv_to_value(record.location),
+        "links": {k: fv.value for k, fv in record.links.items()},
+        "headline": _fv_to_value(record.headline),
+        "years_experience": _fv_to_value(record.years_experience),
         "skills": [
             {"name": fv.value, "confidence": fv.confidence, "sources": [fv.source]}
             for fv in record.skills
@@ -168,12 +168,23 @@ def _build_provenance(record) -> list:
         prov.append({"field": "emails", "source": fv.source, "method": fv.method})
     for fv in record.phones:
         prov.append({"field": "phones", "source": fv.source, "method": fv.method})
+    if record.location:
+        prov.append({"field": "location", "source": record.location.source,
+                     "method": record.location.method})
+    if record.headline:
+        prov.append({"field": "headline", "source": record.headline.source,
+                     "method": record.headline.method})
+    if record.years_experience:
+        prov.append({"field": "years_experience", "source": record.years_experience.source,
+                     "method": record.years_experience.method})
     if record.current_company:
         prov.append({"field": "current_company", "source": record.current_company.source,
                      "method": record.current_company.method})
     if record.current_title:
         prov.append({"field": "current_title", "source": record.current_title.source,
                      "method": record.current_title.method})
+    for k, fv in record.links.items():
+        prov.append({"field": f"links.{k}", "source": fv.source, "method": fv.method})
     for fv in record.skills:
         prov.append({"field": "skills", "source": fv.source, "method": fv.method})
     return prov

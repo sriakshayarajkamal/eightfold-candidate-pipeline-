@@ -144,6 +144,22 @@ def merge_with_confidence(records: list) -> list:
         merged.education = [fv for r in group for fv in r.education]
         merged.experience = [fv for r in group for fv in r.experience]
 
+        # New fields
+        location_candidates = [r.location for r in group if r.location]
+        merged.location = _pick_scalar("location", location_candidates)
+
+        headline_candidates = [r.headline for r in group if r.headline]
+        merged.headline = _pick_scalar("headline", headline_candidates)
+
+        years_candidates = [r.years_experience for r in group if r.years_experience]
+        merged.years_experience = _pick_scalar("years_experience", years_candidates)
+
+        # Links: union across sources (github, portfolio, linkedin, etc.)
+        for r in group:
+            for k, fv in r.links.items():
+                if k not in merged.links or fv.confidence > merged.links[k].confidence:
+                    merged.links[k] = fv
+
         merged_records.append(merged)
 
     return merged_records

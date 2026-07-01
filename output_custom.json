@@ -1,0 +1,153 @@
+[
+  {
+    "full_name": null,
+    "primary_email": null,
+    "phone": null,
+    "skills": [
+      "c"
+    ],
+    "skills_confidence": null,
+    "skills_provenance": null
+  },
+  {
+    "full_name": "Linus Torvalds",
+    "full_name_confidence": 0.8,
+    "full_name_provenance": {
+      "source": "github",
+      "method": "api_field"
+    },
+    "primary_email": null,
+    "phone": null,
+    "skills": [
+      "c",
+      "c++"
+    ],
+    "skills_confidence": null,
+    "skills_provenance": null
+  },
+  {
+    "full_name": "SRI AKSHAYA",
+    "full_name_confidence": 0.7,
+    "full_name_provenance": {
+      "source": "resume",
+      "method": "header_heuristic"
+    },
+    "primary_email": "akshayarsri@gmail.com",
+    "primary_email_confidence": 0.75,
+    "primary_email_provenance": {
+      "source": "resume",
+      "method": "regex_extract"
+    },
+    "phone": "+918015122453",
+    "phone_confidence": 0.75,
+    "phone_provenance": {
+      "source": "resume",
+      "method": "e164_normalize"
+    },
+    "skills": [
+      "css",
+      "express",
+      "git",
+      "java",
+      "javascript",
+      "mongodb",
+      "mysql",
+      "node",
+      "python",
+      "r",
+      "react",
+      "sql"
+    ],
+    "skills_confidence": null,
+    "skills_provenance": null
+  },
+  {
+    "full_name": "Ravi Kumar",
+    "full_name_confidence": 1.0,
+    "full_name_provenance": {
+      "source": "ats_json",
+      "method": "multi_source_agree"
+    },
+    "primary_email": "ravi.kumar@example.com",
+    "primary_email_confidence": 0.9,
+    "primary_email_provenance": {
+      "source": "recruiter_csv",
+      "method": "direct_field"
+    },
+    "phone": "+919123456780",
+    "phone_confidence": 0.9,
+    "phone_provenance": {
+      "source": "recruiter_csv",
+      "method": "e164_normalize"
+    },
+    "skills": null
+  },
+  {
+    "full_name": "Divya Shree",
+    "full_name_confidence": 0.85,
+    "full_name_provenance": {
+      "source": "ats_json",
+      "method": "key_mapped"
+    },
+    "primary_email": "divya.shree@example.com",
+    "primary_email_confidence": 0.85,
+    "primary_email_provenance": {
+      "source": "ats_json",
+      "method": "key_mapped"
+    },
+    "phone": "+919090909090",
+    "phone_confidence": 0.85,
+    "phone_provenance": {
+      "source": "ats_json",
+      "method": "e164_normalize"
+    },
+    "skills": null
+  },
+  {
+    "full_name": "Akshaya Sri",
+    "full_name_confidence": 0.9,
+    "full_name_provenance": {
+      "source": "recruiter_csv",
+      "method": "direct_field"
+    },
+    "primary_email": "akshaya.sri@example.com",
+    "primary_email_confidence": 0.9,
+    "primary_email_provenance": {
+      "source": "recruiter_csv",
+      "method": "direct_field"
+    },
+    "phone": "+919876543210",
+    "phone_confidence": 0.9,
+    "phone_provenance": {
+      "source": "recruiter_csv",
+      "method": "e164_normalize"
+    },
+    "skills": [
+      "aws",
+      "docker",
+      "fastapi",
+      "git",
+      "python",
+      "react",
+      "sql"
+    ],
+    "skills_confidence": null,
+    "skills_provenance": null
+  },
+  {
+    "full_name": "Meena Pillai",
+    "full_name_confidence": 0.9,
+    "full_name_provenance": {
+      "source": "recruiter_csv",
+      "method": "direct_field"
+    },
+    "primary_email": null,
+    "phone": "+919988776655",
+    "phone_confidence": 0.9,
+    "phone_provenance": {
+      "source": "recruiter_csv",
+      "method": "e164_normalize"
+    },
+    "skills": null
+  }
+]

@@ -1,9 +1,25 @@
 Akshaya Sri
+Bangalore, Karnataka
 Email: akshaya.sri@example.com
 Phone: +91-9876543210
 
 Summary:
-Software engineer with experience in Python, SQL, and React.
-Previously worked at TCS as a backend developer before moving roles.
+Software engineer with 3+ years of experience in Python, SQL, and React.
+Passionate about backend systems and data pipelines.
 
-Skills: Python, SQL, React, Git, AWS
+Skills: Python, SQL, React, Git, AWS, Docker, FastAPI
+
+Experience
+
+Software Engineer at Infosys - Jun 2022 - Present
+- Developed REST APIs using FastAPI and Python
+- Worked on data pipelines and SQL optimizations
+- Deployed services on AWS using Docker
+
+Backend Developer Intern at TCS - Jan 2022 - May 2022
+- Built internal tooling in Python
+- Wrote SQL queries for reporting dashboards
+
+Education
+
+B.Tech Computer Science - VIT University 2018 - 2022

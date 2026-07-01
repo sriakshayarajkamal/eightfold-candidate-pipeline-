@@ -16,20 +16,54 @@
   },
   {
     "candidate_id": "akshayarsri@gmail.com",
-    "full_name": null,
+    "full_name": "SRI AKSHAYA",
     "emails": [
       "akshayarsri@gmail.com"
     ],
     "phones": [
       "+918015122453"
     ],
-    "location": null,
-    "links": {},
-    "headline": null,
+    "location": {
+      "city": "Coimbatore",
+      "region": null,
+      "country": "IN"
+    },
+    "links": {
+      "github": "https://github.com/sriakshayarajkamal"
+    },
+    "headline": "Results-oriented Associate Engineer candidate with a background in Full Stack Development and AI. Proven ability to translate complex technical requirements into user-centric digital solutions through international internships and award- winning hackathon projects. Eager to leverage AI tools and communication skills to drive business transformation",
     "years_experience": null,
     "skills": [
       {
         "name": "css",
+        "confidence": 0.75,
+        "sources": [
+          "github"
+        ]
+      },
+      {
+        "name": "javascript",
+        "confidence": 0.75,
+        "sources": [
+          "github"
+        ]
+      },
+      {
+        "name": "python",
+        "confidence": 0.75,
+        "sources": [
+          "github"
+        ]
+      },
+      {
+        "name": "typescript",
+        "confidence": 0.75,
+        "sources": [
+          "github"
+        ]
+      },
+      {
+        "name": "express",
         "confidence": 0.6,
         "sources": [
           "resume"
@@ -44,13 +78,6 @@
       },
       {
         "name": "java",
-        "confidence": 0.6,
-        "sources": [
-          "resume"
-        ]
-      },
-      {
-        "name": "javascript",
         "confidence": 0.6,
         "sources": [
           "resume"
@@ -72,13 +99,6 @@
       },
       {
         "name": "node",
-        "confidence": 0.6,
-        "sources": [
-          "resume"
-        ]
-      },
-      {
-        "name": "python",
         "confidence": 0.6,
         "sources": [
           "resume"
@@ -110,8 +130,8 @@
         "source": "resume"
       },
       {
-        "company": null,
-        "title": "Technical Systems Intern \u2014 Rider Levett Bucknall (RLB), Dubai March \u2013 May 2025",
+        "company": "Technical Systems Intern \u2014 Rider Levett Bucknall (RLB), Dubai March",
+        "title": "May 2025",
         "start": null,
         "end": null,
         "summary": "Developed automated scripts to identify data patterns and perform complex min/max comparisons. Architected structured extraction methods for contractor data (BOQ), improving data integrity.",
@@ -147,6 +167,11 @@
     ],
     "provenance": [
       {
+        "field": "full_name",
+        "source": "resume",
+        "method": "precedence_conflict"
+      },
+      {
         "field": "emails",
         "source": "resume",
         "method": "regex_extract"
@@ -157,14 +182,39 @@
         "method": "e164_normalize"
       },
       {
-        "field": "skills",
+        "field": "location",
         "source": "resume",
-        "method": "keyword_match"
+        "method": "regex_extract"
+      },
+      {
+        "field": "headline",
+        "source": "resume",
+        "method": "precedence_conflict"
+      },
+      {
+        "field": "links.github",
+        "source": "github",
+        "method": "api_field"
       },
       {
         "field": "skills",
-        "source": "resume",
-        "method": "keyword_match"
+        "source": "github",
+        "method": "repo_language"
+      },
+      {
+        "field": "skills",
+        "source": "github",
+        "method": "repo_language"
+      },
+      {
+        "field": "skills",
+        "source": "github",
+        "method": "repo_language"
+      },
+      {
+        "field": "skills",
+        "source": "github",
+        "method": "repo_language"
       },
       {
         "field": "skills",
@@ -207,7 +257,7 @@
         "method": "keyword_match"
       }
     ],
-    "overall_confidence": 0.58
+    "overall_confidence": 0.65
   },
   {
     "candidate_id": "ravi.kumar@example.com",
@@ -321,6 +371,20 @@
         ]
       },
       {
+        "name": "docker",
+        "confidence": 0.5,
+        "sources": [
+          "recruiter_notes"
+        ]
+      },
+      {
+        "name": "fastapi",
+        "confidence": 0.5,
+        "sources": [
+          "recruiter_notes"
+        ]
+      },
+      {
         "name": "git",
         "confidence": 0.5,
         "sources": [
@@ -401,9 +465,19 @@
         "field": "skills",
         "source": "recruiter_notes",
         "method": "keyword_match"
+      },
+      {
+        "field": "skills",
+        "source": "recruiter_notes",
+        "method": "keyword_match"
+      },
+      {
+        "field": "skills",
+        "source": "recruiter_notes",
+        "method": "keyword_match"
       }
     ],
-    "overall_confidence": 0.65
+    "overall_confidence": 0.62
   },
   {
     "candidate_id": "Meena Pillai",

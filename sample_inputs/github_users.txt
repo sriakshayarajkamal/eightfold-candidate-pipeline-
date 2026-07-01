@@ -1,0 +1,6 @@
+# One GitHub username per line (public profiles, no API key needed)
+# Optional: append email hint to force merge with existing candidate
+# Format:  username
+#      or: username:email@example.com
+# Remove lines or leave file empty to skip GitHub enrichment
+sriakshayarajkamal:akshayarsri@gmail.com
