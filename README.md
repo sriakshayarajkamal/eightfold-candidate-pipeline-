@@ -1,7 +1,6 @@
 # Multi-Source Candidate Data Transformer
 ### Eightfold Engineering Intern Assignment — Jul–Dec 2026
 
----
 
 ## What Problem Does This Solve?
 
@@ -11,7 +10,7 @@ This pipeline takes all of those messy, inconsistent inputs and produces **one c
 
 > **Core principle:** *Wrong-but-confident is worse than honestly empty.* A bad value that looks correct silently pollutes hiring decisions. This pipeline never invents data — if it can't extract a field with confidence, it leaves it null and says so.
 
----
+
 
 ## How to Run
 
@@ -37,7 +36,7 @@ python -m unittest tests.test_pipeline -v
 
 That's it. Output JSON files appear in the project root.
 
----
+
 
 ## Input Sources
 
@@ -69,7 +68,7 @@ sriakshayarajkamal:akshayarsri@gmail.com
 ```
 The pipeline calls GitHub's **free public REST API** — no token, no login required. If the network is down or the username doesn't exist, it logs a warning and continues. The rest of the pipeline is unaffected.
 
----
+
 
 ## Pipeline — 4 Stages
 
@@ -145,7 +144,6 @@ The pipeline calls GitHub's **free public REST API** — no token, no login requ
 └─────────────────────┘
 ```
 
----
 
 ## Output Schema
 
@@ -174,7 +172,7 @@ Every candidate profile has these fields:
 
 `provenance` is the audit trail — every field tells you exactly which source it came from and how it was extracted.
 
----
+
 
 ## How Confidence Is Calculated
 
@@ -240,7 +238,7 @@ For **list fields** (skills, emails, phones) — we union across all sources and
 
 The reason this works correctly: normalization runs **before** dedup. `"Python"`, `"PYTHON"`, and `"python"` all become `"python"` before they reach the merge logic — so they collapse into one entry automatically.
 
----
+
 
 ## Custom Output Config
 
@@ -266,7 +264,7 @@ The config can:
 - **Toggle** provenance and confidence on or off
 - **Control** what happens when a value is missing: `null`, `omit`, or `error`
 
----
+
 
 ## Modules
 
@@ -280,7 +278,6 @@ The config can:
 | `pipeline/project_and_validate.py` | Stage 4 — config-driven output projection and validation |
 | `tests/test_pipeline.py` | 7 tests covering edge cases (see below) |
 
----
 
 ## Edge Cases — How Each One Is Handled
 
@@ -289,7 +286,6 @@ The config can:
 
 **Handling:** Structured sources (CSV, ATS) outrank unstructured sources (resume, notes). When two same-rank sources conflict, the pipeline picks a winner but **drops confidence to 0.5** and records `method: "precedence_conflict"` in provenance. This explicitly flags "we made a choice but we're not certain" instead of reporting false confidence.
 
----
 
 ### 2. Garbled / corrupted resume file ⭐
 **Example:** `resume_garbled.txt` — contains broken encoding (`��`), leet-speak substitutions (`R3act!!!`, `Sk!lz`), obfuscated emails (`akshaya[dot]sri[at]example[dot]com`), and invalid phone numbers (`987-654-32XX`).
@@ -300,42 +296,42 @@ The config can:
 - `987-654-32XX` fails `phonenumbers` validation → **dropped with warning**
 - Result: an empty record with `candidate_id: "unknown"` — no invented data
 
----
+
 
 ### 3. Missing email on a candidate
 **Example:** Meena Pillai in `recruiter.csv` has no email column.
 
 **Handling:** The merge stage falls back to name-based matching. The record is kept as a singleton. The `candidate_id` becomes the name since there's no email to use.
 
----
+
 
 ### 4. GitHub profile name doesn't match the CSV name
 **Example:** GitHub returns `"sri akshaya"` but CSV has `"Akshaya Sri"` — these don't match after normalization.
 
 **Handling:** The `github_users.txt` format supports an optional email hint (`username:email@example.com`). This injects the email into the GitHub record so the merge stage can find the right candidate by email instead of guessing on name. Without the hint, the GitHub profile stays as its own separate record — the pipeline never force-merges what it can't confirm.
 
----
+
 
 ### 5. Malformed / unreadable file
 **Example:** A CSV file with raw binary bytes instead of text.
 
 **Handling:** The exception is caught, a warning is logged, and the pipeline continues with all remaining files. One bad file never kills the whole run.
 
----
+
 
 ### 6. Invalid phone number (too short / malformed)
 **Example:** A 9-digit phone from a garbled resume (`987-654-32`).
 
 **Handling:** The `phonenumbers` library validates the number after normalization. Anything that doesn't pass E.164 validation is dropped with a warning. It does NOT appear alongside the correct number as if it were a second contact — that would be wrong-but-confident.
 
----
+
 
 ### 7. Required field missing under strict config
 **Example:** Config says `full_name` is required with `on_missing: error`, but a CSV row has no name.
 
 **Handling:** `project_and_validate` raises a `ValidationError`, the CLI exits with code 1 and prints a clear error message.
 
----
+
 
 ## Why No LLM / Generative API?
 
@@ -353,7 +349,7 @@ Instead, this pipeline uses **only offline, deterministic tools:**
 
 This is a deliberate design decision, not a limitation.
 
----
+
 
 ## Sample Input Files
 
@@ -366,7 +362,7 @@ This is a deliberate design decision, not a limitation.
 | `resume_garbled.txt` | Corrupted/garbled text — exercises robustness (produces empty record) |
 | `github_users.txt` | GitHub username with email hint — exercises GitHub API + forced merge |
 
----
+
 
 ## Known Limitations
 
